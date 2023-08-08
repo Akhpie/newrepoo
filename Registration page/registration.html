@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link rel="stylesheet" href="registration.css">
+  <link rel="stylesheet" href="../Home Page/home.css">
+  <script>
+    function validateForm() {
+      var email = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
+      var phoneNumber = document.getElementById('phoneNumber').value;
+      var username = document.getElementById('username').value;
+      var birthdate = document.getElementById('birthdate').value;
+      var country = document.getElementById('country').value;
+
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('Invalid email format!');
+        return false;
+      }
+      var passwordRegex = /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{8,}$/;
+      if (!passwordRegex.test(password)) {
+        alert('Password must contain at least 8 characters, including letters and numbers!');
+        return false;
+      }
+
+      var phoneNumberRegex = /^[0-9]{10}$/;
+      if (!phoneNumberRegex.test(phoneNumber)) {
+        alert('Phone number must contain exactly 10 digits!');
+        return false;
+      }
+
+      var usernameRegex = /^[a-zA-Z0-9]{3,}$/;
+      if (!usernameRegex.test(username)) {
+        alert('Username must contain at least 3 alphanumeric characters!');
+        return false;
+      }
+
+      alert('Registered!');
+      return true;
+    }
+  </script>
+</head>
+
+<body>
+  <nav class="navbar">
+    <h2><img src="/seans cat.jpeg" alt="" style="width: 50px; border-radius: 50%" class="seans-cat"></h2>
+    <ul>
+      <li><a href="../Home Page/home.html">Home</a></li>
+      <li><a href="../Login page/login.html">Login</a></li>
+      <li><a href="../Registration page/registration.html">Register</a></li>
+      <li><a href="../Prime_test/primesite.html">Prime Checker</a></li>
+
+    </ul>
+  </nav>
+  <h1 class="login-heading">Register Here!</h1>
+  <form action="#" class="login-form" onsubmit="return validateForm()">
+    <div class="inputs">
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" required>
+
+      <label for="phoneNumber">Phone number:</label>
+      <input type="text" id="phoneNumber" required>
+
+      <label for="username">Username:</label>
+      <input type="text" id="username" required>
+
+      <label for="birthdate">Birthdate:</label>
+      <input type="date" id="birthdate" required>
+
+      <label for="country">Country:</label>
+      <select id="country" name="country" required>
+        <option value="">Select Country</option>
+        <option value="usa">India</option>
+        <option value="usa">USA</option>
+        <option value="canada">Canada</option>
+        <option value="uk">UK</option>
+        <option value="australia">Australia</option>
+      </select>
+      <p></p>
+      <input type="submit" value="Register">
+    </div>
+  </form>
+</body>
+
+</html>

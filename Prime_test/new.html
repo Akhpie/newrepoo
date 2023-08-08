@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Prime Number Checker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            margin: 0;
+        }
+
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar li {
+            margin: 0 15px;
+        }
+
+        .prime-checker {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 600px;
+        }
+
+        .prime-checker h1 {
+            margin-bottom: 10px;
+        }
+
+        .num {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100px;
+        }
+
+        .button-check {
+            margin-top: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .button-check:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        .prime,
+        .not-prime {
+            font-weight: bold;
+        }
+
+        .list-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .prime-list,
+        .non-prime-list {
+            flex: 1;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #nonPrimelist li {
+            margin-top: 10px;
+            border: 2px inset #212222;
+            border-radius: 9px;
+        }
+
+        .prime-list-header,
+        .non-prime-list-header {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <h2>Logo</h2>
+        <ul>
+            <li><a href="../Home Page/home.html">Home</a></li>
+            <li><a href="../Login page/login.html">Login</a></li>
+            <li><a href="../Registration page/registration.html">Register</a></li>
+            <li><a href="/Prime_test/primesite.html">Prime checker</a></li>
+        </ul>
+    </nav>
+    <section class="prime-checker">
+        <h1>Prime Number Checker</h1>
+        <p>Enter a number below to check if it's prime or not:</p>
+        <input type="number" id="inputNumber" class="num" />
+        <button onclick="checkPrime()" class="button-check">Check</button>
+        <p id="result"></p>
+        <div class="list-container">
+            <div class="prime-list">
+                <div class="prime-list-header">Prime Numbers Checked:</div>
+                <ul id="primeList"></ul>
+            </div>
+            <div class="non-prime-list">
+                <div class="non-prime-list-header">Non-Prime Numbers Checked:</div>
+                <ul id="nonPrimeList"></ul>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const primeNumbers = [];
+        const nonPrimeNumbers = [];
+
+        function isPrime(number) {
+            if (number <= 1) return false;
+            if (number <= 3) return true;
+
+            if (number % 2 === 0 || number % 3 === 0) return false;
+
+            let i = 5;
+            while (i * i <= number) {
+                if (number % i === 0 || number % (i + 2) === 0) return false;
+                i += 6;
+            }
+
+            return true;
+        }
+
+
+        function checkPrime() {
+            const inputNumber = parseInt(document.getElementById("inputNumber").value);
+
+            if (isNaN(inputNumber)) {
+                document.getElementById("result").textContent = "Please enter a valid number.";
+                return;
+            }
+
+            const isNumberPrime = isPrime(inputNumber);
+            const resultMessage = isNumberPrime ? `${inputNumber} is a prime number.` : `${inputNumber} is not a prime number.`;
+
+            const resultElement = document.getElementById("result");
+            resultElement.textContent = resultMessage;
+            resultElement.className = isNumberPrime ? "prime" : "not-prime";
+
+            if (isNumberPrime) {
+                primeNumbers.push(inputNumber);
+            } else {
+                nonPrimeNumbers.push(inputNumber);
+            }
+
+            updateLists();
+        }
+
+        function updateLists() {
+            const primeListElement = document.getElementById("primeList");
+            const nonPrimeListElement = document.getElementById("nonPrimeList");
+
+            primeListElement.innerHTML = primeNumbers.map(number => `<li>${number}</li>`).join("");
+            nonPrimeListElement.innerHTML = nonPrimeNumbers.map(number => `<li>${number}</li>`).join("");
+        }
+    </script>
+</body>
+
+</html>
